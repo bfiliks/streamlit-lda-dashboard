@@ -70,7 +70,7 @@ For demo/testing, you can use a sample YouTube comments CSV (ensure it has a `te
 ---
 ## 👤 Author
 **Felix B. Oke**  
-Information Sciences PhD | Digital Humanities | NLP Researcher  
+Information Sciences | Digital Humanities | NLP Researcher  
 [GitHub](https://github.com/bfiliks) | [LinkedIn](https://www.linkedin.com/in/felix-oke-60294236/)
 
 ---
