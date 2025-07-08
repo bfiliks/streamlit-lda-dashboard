@@ -1,6 +1,8 @@
-pandas
-plotly
 streamlit
+pandas
+numpy
+plotly
 gensim
 scikit-learn
 textblob
+pyLDAvis
