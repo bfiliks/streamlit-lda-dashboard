@@ -1,23 +1,49 @@
+# UNDERSIEGE YouTube Comments Dashboard ![Dashboard Screenshot](newplot(9).png)
+
+
 # UNDERSIEGE YouTube Comments Dashboard
-![Dashboard Screenshot](newplot(9).png)
 
+This project presents an interactive dashboard for analyzing viewer responses to the Mount Zion musical film **UNDERSIEGE** using natural language processing (NLP) techniques.
 
-An interactive **Streamlit** dashboard for analyzing and visualizing viewer comments on the Mount Zion musical film [**UNDERSIEGE**](https://www.youtube.com/watch?v=11FQQv81hDw&t=799s) on YouTube.
+Built with **Python, Streamlit, Plotly, and Gensim**, this tool visualizes:
 
-This tool leverages **topic modeling**, **sentiment analysis**, and **t-SNE clustering** to help uncover patterns, themes, and emotional responses from YouTube audience feedback.
+- 🎯 **Topic Modeling** via LDA (Latent Dirichlet Allocation)
+- 💬 **Sentiment Analysis** using TextBlob
+- 🔍 **Keyword Search** with interactive highlighting
+- 📉 **t-SNE Visualization** of thematic clusters
+- 📁 **Downloadable filtered comments** as CSV
+
+Useful for researchers, content creators, and digital evangelists studying reception, themes, and emotional tone in online faith-based media.
 
 ---
 
-## 🚀 Features
+## 🚀 Getting Started
 
-- 📥 Upload CSV file of YouTube comments
-- 🧠 Topic Modeling (LDA)
-- 🎯 t-SNE visualization of topic distributions
-- 💬 Sentiment Analysis (Positive, Neutral, Negative)
-- 🏷️ Human-readable Topic Labels
-- 📊 Filter and explore by Topic or Sentiment
-- 📎 Download analyzed comments as CSV
-- 📸 Screenshot below
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/bfiliks/streamlit_lda_dashboard.git
+   cd streamlit_lda_dashboard
+   ```
+
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Run the app:
+   ```bash
+   streamlit run app.py
+   ```
+---
+
+## 🧠 Features
+
+- Upload YouTube comments CSV file
+- Automatic topic assignment (LDA)
+- Sentiment scoring: Positive, Neutral, Negative
+- Interactive keyword search and filtering
+- t-SNE plot for visualizing topic clusters
+- Data export with topic & sentiment labels
 
 ---
 
@@ -38,11 +64,29 @@ This tool leverages **topic modeling**, **sentiment analysis**, and **t-SNE clus
 ## 🧰 Requirements
 pip install -r requirements.txt
 
-## 👤 Author
+---
 
-Felix B. Oke,
-Information Sciences, UIUC
+## 📎 Sample Data
+For demo/testing, you can use a sample YouTube comments CSV (ensure it has a `text` column).
+
+---
+## 👤 Author
+**Felix B. Oke**  
+Information Sciences PhD | Digital Humanities | NLP Researcher  
+[GitHub](https://github.com/bfiliks) | [LinkedIn](https://www.linkedin.com/in/felix-oke-60294236/)
+
+---
+
+## 🔗 Related
+- Original video: [Mount Zion's UNDERSIEGE - Musical Film](https://www.youtube.com/watch?v=11FQQv81hDw)
+
+---
 
 ## 📄 License
+MIT License
 
-MIT License — free to use, modify, and distribute with credit.
+---
+
+Enjoy exploring what people are really saying — and why it matters.
+
+> "Out of the abundance of the heart, the mouth speaks." – Matthew 12:34
