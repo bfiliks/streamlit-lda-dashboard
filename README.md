@@ -41,7 +41,7 @@ pip install -r requirements.txt
 ## 👤 Author
 
 Felix B. Oke,
-UIUC
+Information Sciences, UIUC
 
 ## 📄 License
 
