@@ -1,6 +1,7 @@
 # UNDERSIEGE YouTube Comments Dashboard ![Dashboard Screenshot](newplot(9).png)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 ![Python](https://img.shields.io/badge/python-3.9+-blue.svg)
+![Last Updated](https://img.shields.io/badge/last%20updated-July%2025,%202025-brightgreen)
 
 This project presents an interactive dashboard for analyzing viewer responses to the Mount Zion musical film **UNDERSIEGE** using natural language processing (NLP) techniques.
 
