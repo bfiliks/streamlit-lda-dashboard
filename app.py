@@ -5,10 +5,12 @@ import plotly.express as px
 from gensim import corpora, models
 from gensim.utils import simple_preprocess
 from sklearn.manifold import TSNE
+from textblob import TextBlob
+from io import StringIO
 
 # --- Load and preprocess comments ---
 st.title("UNDERSIEGE YouTube Comments Dashboard")
-st.markdown("Visualize and explore themes from viewer responses")
+st.markdown("Visualize topics, sentiment, and download insights from viewer responses")
 
 # Upload CSV
 uploaded_file = st.file_uploader("Upload your YouTube comments CSV", type="csv")
@@ -41,7 +43,6 @@ if uploaded_file is not None:
         topic_vec = [prob for _, prob in topic_dist]
         topic_vectors.append(topic_vec)
 
-    # Convert to NumPy array
     topic_array = np.array(topic_vectors)
 
     # --- t-SNE Dimensionality Reduction ---
@@ -51,25 +52,58 @@ if uploaded_file is not None:
     # Assign dominant topic
     dominant_topic = [np.argmax(tv) for tv in topic_vectors]
 
-    # Build DataFrame for Plotly
+    # Add sentiment analysis
+    def get_sentiment(text):
+        polarity = TextBlob(text).sentiment.polarity
+        if polarity > 0.1:
+            return "Positive"
+        elif polarity < -0.1:
+            return "Negative"
+        else:
+            return "Neutral"
+
+    sentiments = comments.apply(get_sentiment)
+
+    # Map topic numbers to labels
+    topic_labels = {
+        0: "Worship & Music",
+        1: "Spiritual Warfare",
+        2: "Encouragement",
+        3: "Repentance & End Times",
+        4: "Testimonies & Gratitude"
+    }
+
+    # Build DataFrame for visualization
     tsne_df = pd.DataFrame({
         'Comment': comments.values,
         'Topic': dominant_topic,
         'tSNE-1': tsne_results[:, 0],
-        'tSNE-2': tsne_results[:, 1]
+        'tSNE-2': tsne_results[:, 1],
+        'Sentiment': sentiments
     })
+    tsne_df["Topic_Label"] = tsne_df["Topic"].map(topic_labels)
 
     # --- Plotly Interactive Scatter ---
+    color_option = st.selectbox("Color plot by", ["Topic_Label", "Sentiment"])
+
     fig = px.scatter(
         tsne_df,
         x='tSNE-1',
         y='tSNE-2',
-        color=tsne_df['Topic'].astype(str),
-        hover_data=['Comment'],
-        title='t-SNE Visualization of LDA Topics'
+        color=color_option,
+        hover_data=['Comment', 'Topic_Label', 'Sentiment'],
+        title=f't-SNE Visualization of Comments by {color_option}'
     )
     st.plotly_chart(fig)
 
-    # Optional: Filter and view topic-wise
-    topic_choice = st.selectbox("Filter by Topic ID", sorted(tsne_df['Topic'].unique()))
-    st.dataframe(tsne_df[tsne_df['Topic'] == topic_choice][['Comment', 'Topic']])
+    # --- Filter and display table ---
+    st.subheader("Explore Comments Table")
+    st.dataframe(tsne_df[['Comment', 'Topic_Label', 'Sentiment']])
+
+    # --- Download button ---
+    st.download_button(
+        label="📥 Download Labeled Comments as CSV",
+        data=tsne_df.to_csv(index=False),
+        file_name="analyzed_comments.csv",
+        mime="text/csv"
+    )
