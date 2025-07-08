@@ -1,27 +1,47 @@
 # UNDERSIEGE YouTube Comments Dashboard ![Dashboard Screenshot](newplot(9).png)
 
 
-An interactive Streamlit dashboard for visualizing viewer feedback on the Mount Zion musical film **UNDERSIEGE** using:
+# UNDERSIEGE YouTube Comments Dashboard
 
-- 📊 Topic Modeling (LDA)
-- 🎯 Dimensionality Reduction (t-SNE)
-- 📍 Interactive Plotly Visuals
-- 🧠 NLP Preprocessing with Gensim
+An interactive **Streamlit** dashboard for analyzing and visualizing viewer comments on the Mount Zion musical film **UNDERSIEGE**.
+
+This tool leverages **topic modeling**, **sentiment analysis**, and **t-SNE clustering** to help uncover patterns, themes, and emotional responses from YouTube audience feedback.
 
 ---
 
 ## 🚀 Features
 
-- Upload YouTube comments in `.csv` format
-- Automatically detects and visualizes 5 dominant topics
-- Hoverable t-SNE scatter plot of topic clusters
-- Filter and explore comments by topic
+- 📥 Upload CSV file of YouTube comments
+- 🧠 Topic Modeling (LDA)
+- 🎯 t-SNE visualization of topic distributions
+- 💬 Sentiment Analysis (Positive, Neutral, Negative)
+- 🏷️ Human-readable Topic Labels
+- 📊 Filter and explore by Topic or Sentiment
+- 📎 Download analyzed comments as CSV
+- 📸 Screenshot below
 
 ---
 
-## 🛠 Requirements
+### 📊 Example Dashboard View
 
-Install Python packages via:
+![Dashboard Screenshot](newplot(8).png)
 
-```bash
+---
+
+## ▶️ How to Use
+
+1. Clone the repo
+2. Install dependencies
+3. Run with Streamlit:
+   ```bash
+   streamlit run app.py
+
+## 🧰 Requirements
 pip install -r requirements.txt
+
+## 👤 Author
+Felix B. Oke
+UIUC
+
+##📄 License
+MIT License — free to use, modify, and distribute with credit.
