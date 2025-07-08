@@ -1,0 +1,25 @@
+# Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+
+# Environment folders
+venv/
+.env/
+.venv/
+
+# Jupyter and Streamlit temporary files
+.ipynb_checkpoints/
+.streamlit/
+
+# OS and editor files
+.DS_Store
+.vscode/
+
+# Data files
+*.csv
+*.xlsx
+*.json
+
+# Misc
+*.log
