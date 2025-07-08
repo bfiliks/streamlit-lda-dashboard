@@ -2,8 +2,6 @@
 ![Dashboard Screenshot](newplot(9).png)
 
 
-# UNDERSIEGE YouTube Comments Dashboard
-
 An interactive **Streamlit** dashboard for analyzing and visualizing viewer comments on the Mount Zion musical film **UNDERSIEGE**.
 
 This tool leverages **topic modeling**, **sentiment analysis**, and **t-SNE clustering** to help uncover patterns, themes, and emotional responses from YouTube audience feedback.
