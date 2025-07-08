@@ -3,3 +3,4 @@ plotly
 streamlit
 gensim
 scikit-learn
+textblob
