@@ -1,25 +1,58 @@
-# Python cache and compiled files
+# 👉 Python cache and virtual environments
 __pycache__/
-*.pyc
+*.py[cod]
 *.pyo
-
-# Environment folders
-venv/
-.env/
+*.pyd
+*.so
+*.egg-info/
+*.egg
+.env
 .venv/
+venv/
+ENV/
+env/
 
-# Jupyter and Streamlit temporary files
+# 👉 Jupyter/Streamlit-related temp files
 .ipynb_checkpoints/
+*.ipynb
 .streamlit/
 
-# OS and editor files
-.DS_Store
+# 👉 VS Code settings and metadata
 .vscode/
+*.code-workspace
 
-# Data files
-*.csv
-*.xlsx
-*.json
+# 👉 System files
+.DS_Store
+Thumbs.db
 
-# Misc
+# 👉 Logs and temporary files
 *.log
+*.tmp
+
+# 👉 Build artifacts
+build/
+dist/
+*.spec
+
+# 👉 Data files (optional)
+*.csv
+*.tsv
+*.json
+*.xlsx
+*.sav
+*.db
+
+# 👉 Hidden OS files
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# 👉 Git files you don't want
+.gitignore~
+
+# 👉 Cache
+.cache/
+*.cache
+
+# 👉 Streamlit secrets (just in case)
+secrets.toml
