@@ -1,4 +1,5 @@
-# UNDERSIEGE YouTube Comments Dashboard
+# UNDERSIEGE YouTube Comments Dashboard ![Dashboard Screenshot](screenshot.png)
+
 
 An interactive Streamlit dashboard for visualizing viewer feedback on the Mount Zion musical film **UNDERSIEGE** using:
 
