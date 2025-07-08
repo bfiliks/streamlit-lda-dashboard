@@ -6,7 +6,7 @@ from gensim import corpora, models
 from gensim.utils import simple_preprocess
 from sklearn.manifold import TSNE
 from textblob import TextBlob
-from io import StringIO
+import re
 
 # --- Load and preprocess comments ---
 st.title("UNDERSIEGE YouTube Comments Dashboard")
@@ -83,11 +83,18 @@ if uploaded_file is not None:
     })
     tsne_df["Topic_Label"] = tsne_df["Topic"].map(topic_labels)
 
+    # --- Sidebar Filters ---
+    st.sidebar.header("🔧 Filter Options")
+    selected_topic = st.sidebar.multiselect("Filter by Topic Label", options=tsne_df['Topic_Label'].unique(), default=tsne_df['Topic_Label'].unique())
+    selected_sentiment = st.sidebar.multiselect("Filter by Sentiment", options=tsne_df['Sentiment'].unique(), default=tsne_df['Sentiment'].unique())
+
+    filtered_df = tsne_df[(tsne_df['Topic_Label'].isin(selected_topic)) & (tsne_df['Sentiment'].isin(selected_sentiment))]
+
     # --- Plotly Interactive Scatter ---
     color_option = st.selectbox("Color plot by", ["Topic_Label", "Sentiment"])
 
     fig = px.scatter(
-        tsne_df,
+        filtered_df,
         x='tSNE-1',
         y='tSNE-2',
         color=color_option,
@@ -96,14 +103,46 @@ if uploaded_file is not None:
     )
     st.plotly_chart(fig)
 
-    # --- Filter and display table ---
+    # --- Keyword Search ---
+    st.subheader("🔍 Keyword Search in Comments")
+    search_input = st.text_input("Enter keyword(s) separated by commas (e.g. Jesus, Daniel, music)", "")
+
+    keyword_df = filtered_df.copy()
+
+    if search_input:
+        # Process multiple keywords
+        keywords = [kw.strip() for kw in search_input.split(",") if kw.strip()]
+        pattern = '|'.join(re.escape(kw) for kw in keywords)
+
+        # Filter by keyword presence (case-insensitive)
+        mask = keyword_df['Comment'].str.contains(pattern, case=False, na=False)
+        keyword_df = keyword_df[mask]
+
+        st.success(f"Found {len(keyword_df)} comment(s) containing: {', '.join(keywords)}")
+
+        # Highlight using regex (preserving original casing)
+        def highlight_terms(comment):
+            def replacer(match):
+                return f"**:orange[`{match.group(0)}`]**"
+            return re.sub(pattern, replacer, comment, flags=re.IGNORECASE)
+
+        st.markdown("### Matched Comments (Highlighted)")
+        for i, (_, row) in enumerate(keyword_df.iterrows()):
+            if i >= 50:
+                st.warning("Too many results! Showing only first 50 matches.")
+                break
+            st.markdown(f"- {highlight_terms(row['Comment'])}")
+    else:
+        st.info("Showing all comments (no keyword filter applied)")
+
+    # --- Filtered Table Display ---
     st.subheader("Explore Comments Table")
-    st.dataframe(tsne_df[['Comment', 'Topic_Label', 'Sentiment']])
+    st.dataframe(keyword_df[['Comment', 'Topic_Label', 'Sentiment']])
 
     # --- Download button ---
     st.download_button(
-        label="📥 Download Labeled Comments as CSV",
-        data=tsne_df.to_csv(index=False),
-        file_name="analyzed_comments.csv",
+        label="📥 Download Filtered Comments as CSV",
+        data=keyword_df[['Comment', 'Topic_Label', 'Sentiment']].to_csv(index=False),
+        file_name="filtered_comments.csv",
         mime="text/csv"
     )
