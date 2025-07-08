@@ -44,7 +44,7 @@ pip install -r requirements.txt
 Felix B. Oke,
 UIUC
 
-##📄 License
+## 📄 License
 
 
 MIT License — free to use, modify, and distribute with credit.
